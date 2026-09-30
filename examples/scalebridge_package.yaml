@@ -1,0 +1,88 @@
+# Optional Home Assistant package for ScaleBridge Sync.
+# Replace HOME_ASSISTANT_IP before use, for example:
+#   http://192.168.1.50:8723/api/status
+
+rest:
+  - resource: "http://HOME_ASSISTANT_IP:8723/api/status"
+    scan_interval: 60
+    timeout: 10
+
+    sensor:
+      - name: "ScaleBridge Version"
+        unique_id: scalebridge_version
+        icon: mdi:scale-bathroom
+        value_template: "{{ value_json.version | default('unknown') }}"
+
+      - name: "ScaleBridge Sync Status"
+        unique_id: scalebridge_sync_status
+        icon: mdi:sync
+        value_template: >-
+          {% if value_json.sync.running | default(false) %}
+            Syncing
+          {% elif value_json.sync.last_error | default('') %}
+            Error
+          {% else %}
+            Healthy
+          {% endif %}
+
+      - name: "ScaleBridge Last Sync"
+        unique_id: scalebridge_last_sync
+        device_class: timestamp
+        icon: mdi:clock-check-outline
+        value_template: "{{ value_json.sync.last_at }}"
+
+      - name: "ScaleBridge Next Sync"
+        unique_id: scalebridge_next_sync
+        device_class: timestamp
+        icon: mdi:clock-outline
+        value_template: "{{ value_json.sync.next_at }}"
+
+      - name: "ScaleBridge Sync Interval"
+        unique_id: scalebridge_sync_interval
+        unit_of_measurement: "min"
+        icon: mdi:timer-sync-outline
+        value_template: "{{ value_json.sync.interval_minutes | int(0) }}"
+
+      - name: "ScaleBridge Last Fetched"
+        unique_id: scalebridge_last_fetched
+        icon: mdi:download
+        value_template: "{{ value_json.sync.last_fetched | int(0) }}"
+
+      - name: "ScaleBridge Last Uploaded"
+        unique_id: scalebridge_last_uploaded
+        icon: mdi:upload
+        value_template: "{{ value_json.sync.last_uploaded | int(0) }}"
+
+      - name: "ScaleBridge Last Error"
+        unique_id: scalebridge_last_error
+        icon: mdi:alert-circle-outline
+        value_template: >-
+          {% set error = value_json.sync.last_error | default('') %}
+          {{ error if error else 'None' }}
+
+      - name: "ScaleBridge Backfill"
+        unique_id: scalebridge_backfill
+        icon: mdi:history
+        value_template: >-
+          {{ value_json.backfill.done | int(0) }}/{{ value_json.backfill.total | int(0) }}
+
+    binary_sensor:
+      - name: "ScaleBridge Withings Connected"
+        unique_id: scalebridge_withings_connected
+        device_class: connectivity
+        value_template: "{{ value_json.withings.connected | default(false) }}"
+
+      - name: "ScaleBridge Garmin Connected"
+        unique_id: scalebridge_garmin_connected
+        device_class: connectivity
+        value_template: "{{ value_json.garmin.connected | default(false) }}"
+
+      - name: "ScaleBridge Sync Running"
+        unique_id: scalebridge_sync_running
+        device_class: running
+        value_template: "{{ value_json.sync.running | default(false) }}"
+
+      - name: "ScaleBridge Update Available"
+        unique_id: scalebridge_update_available
+        device_class: update
+        value_template: "{{ value_json.update.newer | default(false) }}"
