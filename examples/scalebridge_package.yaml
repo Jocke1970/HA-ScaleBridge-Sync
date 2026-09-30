@@ -84,5 +84,5 @@ rest:
 
       - name: "ScaleBridge Update Available"
         unique_id: scalebridge_update_available
-        device_class: update
+        icon: mdi:update
         value_template: "{{ value_json.update.newer | default(false) }}"
