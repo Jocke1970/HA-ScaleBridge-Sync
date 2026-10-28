@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+- Update upstream ScaleBridge Sync from 0.0.3 to 0.0.5:
+  - 0.0.4: syncing keeps working after Withings' API-plan change of 12 October 2026, and hydration is correct (body water in kg was uploaded as a percentage).
+  - 0.0.5: a `public_url` with a non-standard port works behind reverse proxies that drop the port from the Host header, such as Nginx Proxy Manager.
+- Document that `public_url` must match the browser's address exactly, and that the web UI and the optional sensors only answer on that address.
+
 ## 0.2.0
 
 - Convert the local proof-of-concept into an installable Home Assistant add-on repository.

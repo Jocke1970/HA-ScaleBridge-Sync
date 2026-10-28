@@ -1,5 +1,5 @@
 name: "ScaleBridge Sync"
-version: "0.2.0"
+version: "0.2.1"
 slug: "scalebridge_sync"
 description: "Self-hosted Withings to Garmin Connect synchronization using ScaleBridge Sync"
 url: "https://github.com/Jocke1970/HA-ScaleBridge-Sync"

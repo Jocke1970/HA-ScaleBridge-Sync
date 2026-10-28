@@ -16,8 +16,8 @@ This repository is **not** the ScaleBridge Sync project itself. It packages the 
 
 ## Current version
 
-- Add-on: **0.2.0**
-- Upstream ScaleBridge Sync: **0.0.3** (pinned)
+- Add-on: **0.2.1**
+- Upstream ScaleBridge Sync: **0.0.5** (pinned)
 
 ## Home Assistant status sensors
 

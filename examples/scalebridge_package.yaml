@@ -1,6 +1,8 @@
 # Optional Home Assistant package for ScaleBridge Sync.
 # Replace HOME_ASSISTANT_IP before use, for example:
 #   http://192.168.1.50:8723/api/status
+# Use the same address as the add-on's public_url: ScaleBridge Sync answers
+# only to that address (and localhost), anything else gets 403 forbidden_host.
 
 rest:
   - resource: "http://HOME_ASSISTANT_IP:8723/api/status"

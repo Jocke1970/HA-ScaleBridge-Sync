@@ -1,4 +1,4 @@
-FROM ulfdalen/scalebridge-sync:0.0.3
+FROM ulfdalen/scalebridge-sync:0.0.5
 
 ARG BUILD_VERSION
 ARG BUILD_ARCH
